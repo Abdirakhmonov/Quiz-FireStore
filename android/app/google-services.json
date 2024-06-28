@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "430060484059",
+    "project_id": "akromjon-a291b",
+    "storage_bucket": "akromjon-a291b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430060484059:android:bff8f42c8cb504843ce3fe",
+        "android_client_info": {
+          "package_name": "com.example.lesson_65"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3FVUCEFRib3X-gDZMRkkDz93xvjx3KrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
