@@ -134,7 +134,7 @@ class _HomepageState extends State<Homepage> {
                                             builder: (context) {
                                               return AlertDialog(
                                                 title: const Text(
-                                                    "End of the test"),
+                                                    "Savollar yakunlandi"),
                                                 content: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
