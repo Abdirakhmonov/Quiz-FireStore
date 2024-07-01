@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson_65/providers/select_index.dart';
+import 'package:lesson_65/utils/routes.dart';
 import 'package:lesson_65/views/screens/home_page.dart';
+import 'package:lesson_65/views/screens/login_screen.dart';
+import 'package:lesson_65/views/screens/registr_screen.dart';
 import 'package:provider/provider.dart';
 import 'controllers/question_controller.dart';
 import 'firebase_options.dart';
@@ -30,9 +34,22 @@ class MyWidget extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
               backgroundColor: Colors.transparent,
             ),
-            scaffoldBackgroundColor: const Color(0xff7F80DB),
           ),
-          home: const Homepage(),
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return const Homepage();
+              }
+
+              return const LoginScreen();
+            },
+          ),
+          routes: {
+            AppRoutes.login: (context) => const LoginScreen(),
+            AppRoutes.register: (context) => const RegisterScreen(),
+            AppRoutes.home: (context) => const Homepage(),
+          },
         );
       },
     );

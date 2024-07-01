@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lesson_65/sevices/firebase_auth_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/question_controller.dart';
@@ -15,6 +17,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final firebaseAuthService = FirebaseAuthService();
   late PageController _pageController;
   int correctAnswers = 0;
   int length = 0;
@@ -35,15 +38,48 @@ class _HomepageState extends State<Homepage> {
     final questionController = context.read<QuestionController>();
 
     return Scaffold(
+      backgroundColor: const Color(0xff7F80DB),
       key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leadingWidth: 100,
         leading: GestureDetector(
-            onTap: () {
-              _scaffoldKey.currentState!.openDrawer();
-            },
-            child: const Icon(Icons.menu)),
+          onTap: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          child: const Icon(Icons.menu),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Accountdan chiqib ketishga aminmisiz?"),
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("Cancel"),
+                            ),
+                            FilledButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                FirebaseAuth.instance.signOut();
+                              },
+                              child: const Text("Logout"),
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              },
+              icon: const Icon(Icons.logout))
+        ],
         // title: const Text("Animation"),
       ),
       body: StreamBuilder(

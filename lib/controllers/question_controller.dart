@@ -13,4 +13,5 @@ class QuestionController extends ChangeNotifier {
     _quizFirestore.addQuestion(answers, correct, question);
     notifyListeners();
   }
+
 }
